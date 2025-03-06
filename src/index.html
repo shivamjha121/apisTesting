@@ -15,12 +15,12 @@
     /* Set height for the map container */
     #map {
       width: 100%;
-      height: 100vh;
+      height: 90vh;
       /* Full viewport height */
     }
 
     /* Headers */
-    * {
+    /* * {
       margin: 0;
       padding: 0;
       color: #f2f5f7;
@@ -95,13 +95,14 @@
 
     /*Styling Buttons*/
     .login-button {
-      background-color: transparent;
-      border: 1.5px solid #f2f5f7;
-      border-radius: 2em;
-      padding: 0.6rem 0.8rem;
-      margin-left: 2vw;
-      font-size: 1rem;
-      cursor: pointer;
+      background-color: hsla(0, 0%, 100%, .75);
+    border: 1.5px solid #f2f5f7;
+    border-radius: 2em;
+    padding: 0.6rem 0.8rem;
+    margin-left: 2vw;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: 450px;
 
     }
 
@@ -229,17 +230,238 @@
 
     .toggle .line3 {
       transform: rotate(45deg) translate(-5px, -6px);
-    }
+    } */
 
     .hidden {
       display: none;
 
     }
+    /* new */
+
+-----------------
+Dropdown Styles 
+-----------------
+*/
+.dropdown-container {
+	display: inline-block;
+	padding: 10px;
+}
+
+.dropdown {
+	position: relative;
+  margin: 40px;
+}
+
+.dropdown[open] .with-down-arrow::after {
+	content: "\e5c7";
+}
+
+.dropdown[open] summary {
+	background: #ffffff10;
+}
+
+.dropdown summary {
+	list-style: none;
+	display: inline-block;
+	cursor: pointer;
+	border-radius: 6px;
+}
+
+.dropdown summary.avatar {
+	border-radius: 50px;
+}
+
+.dropdown summary.avatar img {
+	width: 40px;
+	height: 40px;
+	border-radius: 50px;
+	display: inline-block;
+	margin: 0;
+}
+
+.dropdown summary.with-down-arrow {
+	display: inline-flex;
+	padding: 5px;
+	align-items: center;
+	color: #fff;
+	line-height: 1;
+}
+
+.dropdown summary.with-down-arrow::after {
+	content: "\e5c5";
+	font-family: "Material Symbols Outlined";
+	font-weight: normal;
+	font-style: normal;
+	font-size: 1.5rem;
+	line-height: 1;
+	letter-spacing: normal;
+	text-transform: none;
+	display: inline-block;
+	white-space: nowrap;
+	word-wrap: normal;
+	direction: ltr;
+	-webkit-font-smoothing: antialiased;
+}
+
+.dropdown.left ul {
+	left: 0;
+}
+
+.dropdown.right ul {
+	right: 0;
+}
+
+.dropdown ul {
+	padding: 0;
+	margin: 0;
+	box-shadow: 0 0 10px #00000030;
+	min-width: max-content;
+	position: absolute;
+	top: 100%;
+	border-radius: 10px;
+	background-color: #fff;
+	z-index: 2;
+}
+
+.dropdown ul li {
+	list-style-type: none;
+	display: block;
+}
+
+.dropdown ul li:first-of-type {
+	border: none;
+	background-color: #f2f2f2;
+}
+
+.dropdown ul li p {
+	padding: 10px 15px;
+	margin: 0;
+}
+
+.dropdown ul li a {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 10px 15px;
+	text-decoration: none;
+	line-height: 1;
+	color: #333;
+}
+
+.dropdown ul li a:hover {
+	color: #ff34b2;
+}
+
+.dropdown ul li:first-of-type {
+	border-radius: 10px 10px 0 0;
+}
+
+.dropdown ul li:last-of-type {
+	border-radius: 0 0 10px 10px;
+}
+
+.dropdown ul li.divider {
+	border: none;
+	border-bottom: 1px solid #333;
+}
+
+.dropdown ul li.divider ~ li {
+	border: none;
+}
+
+/*
+-----------------
+IGNORE: CODEPEN STYLES
+-----------------
+*/
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	scrollbar-gutter: stable;
+}
+
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,
+		Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	padding: 0;
+	margin: 0;
+	font-size: 13pt;
+	scrollbar-gutter: stable;
+}
+
+a {
+	text-decoration: none;
+	color: #ff34b2;
+	cursor: pointer;
+}
+
+section {
+	width: 100%;
+	margin: 0 auto;
+  
+}
+
+section blockquote {
+	padding: 10px 15px;
+	border-radius: 6px;
+	background: #f2f2f2;
+	margin: 0 0 20px 0;
+	width: 100%;
+	border-left: 5px solid #ff34b2;
+}
+
+section article {
+	/* box-shadow: 0 0 10px #00000030;
+	border-radius: 6px;
+	margin: 20px 0; */
+}
+
+nav {
+	background: #232224;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+  height: 50px;
+	/* border-radius: 6px; */
+}
+
+nav .links {
+	display: flex;
+	align-items: center;
+}
+
+nav .links a {
+	text-decoration: none;
+	color: #fff;
+	padding: 10px 15px;
+}
+
+nav .links a.icon-logo {
+	font-size: 1.5rem;
+	line-height: 1;
+	color: #ff34b2;
+}
+
+.block {
+	display: block;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.italic {
+	font-style: italic;
+}
+
   </style>
 </head>
 
 <body>
-  <nav>
+  <!-- <nav>
     <div class="logo">
       <img src="logo.svg" alt="Logo Image">
     </div>
@@ -257,7 +479,111 @@
       <li><button id="loginBtn" class="login-button" onclick="window.location.href='login.html'">Login</button></li>
       <li><button id="logoutBtn" class="join-button" onclick="logout()">Logout</button></li>
     </ul>
-  </nav>
+  </nav> -->
+  <section>
+    <article>
+      <nav>
+        <!-- START: Links Container -->
+        <div class="links">
+          <a href="#" class="icon-logo">
+            <span class="material-symbols-outlined">home_app_logo</span>
+          </a>
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+  
+          <!-- START: Dropdown Container text version -->
+          <div class="dropdown-container">
+            <details class="dropdown left">
+              <summary>
+                <span class="with-down-arrow">Jane Doe</span>
+              </summary>
+              <ul>
+                <!-- Optional: user details area w/ gray bg -->
+                <li>
+                  <p>
+                    <span class="block bold">Jane Doe</span>
+                    <span class="block italic">jane@example.com</span>
+                  </p>
+                </li>
+                <!-- Menu links -->
+                <li>
+                  <a href="#">
+                    <span class="material-symbols-outlined">account_circle</span> Account
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <span class="material-symbols-outlined">settings</span> Settings
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <span class="material-symbols-outlined">help</span> Help
+                  </a>
+                </li>
+                <!-- Optional divider -->
+                <li class="divider"></li>
+                <li>
+                  <a href="#">
+                    <span class="material-symbols-outlined">logout</span> Logout
+                  </a>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <!-- END: Dropdown Container -->
+  
+        </div>
+        <!-- END: Links Container -->
+        <div>
+          <button id="loginBtn" class="login-button" onclick="window.location.href='login.html'">Login</button>
+        </div>
+        <!-- START: Dropdown Container avatar version -->
+        <div id="userProfile" class="dropdown-container">
+          <details class="dropdown right">
+            <summary class="avatar">
+              <img src="https://gravatar.com/avatar/00000000000000000000000000000000?d=mp">
+            </summary>
+            <ul>
+              <!-- Optional: user details area w/ gray bg -->
+              <li>
+                <p>
+                  <span class="block bold" id="name">Jane Doe</span>
+                  <span class="block italic" id="email">jane@example.com</span>
+                </p>
+              </li>
+              <!-- Menu links -->
+              <li>
+                <a href="#">
+                  <span class="material-symbols-outlined"></span> Account
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="material-symbols-outlined"></span> Settings
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="material-symbols-outlined"></span> Help
+                </a>
+              </li>
+              <!-- Optional divider -->
+              <li class="divider"></li>
+              <li>
+                <a onclick="logout()">
+                  <span class="material-symbols-outlined"></span> Logout
+                </a>
+              </li>
+            </ul>
+          </details>
+        </div>
+        <!-- END: Dropdown Container -->
+      </nav>
+    </article>
+  </section>
+  
+
   <!-- Map container -->
   <div id="map"></div>
 
@@ -271,31 +597,37 @@
       console.log(user);
 
       const loginBtn = document.getElementById('loginBtn');
-      const logoutBtn = document.getElementById('logoutBtn');
+      const logoutBtn = document.getElementById('userProfile');
+      const name = document.getElementById('name');
+      const email = document.getElementById('email');
+      console.log(loginBtn, logoutBtn);
 
       // Check if the user is logged in
       if (user) {
-        loginBtn.classList.add('hidden'); // Hide login button
-        logoutBtn.classList.remove('hidden'); // Show logout button
+        const userData = JSON.parse(user);
+        name.textContent = userData.role;
+        email.textContent = userData.email;
+        loginBtn.style.display = 'none'; // Hide login button
+        logoutBtn.style.display = 'block'; // Show logout button
       } else {
-        loginBtn.classList.remove('hidden'); // Show login button
-        logoutBtn.classList.add('hidden'); // Hide logout button
+        loginBtn.style.display = 'block'; // Show login button
+        logoutBtn.style.display = 'none'; // Hide logout button
       }
     });
 
-    const hamburger = document.querySelector(".hamburger");
-    const navLinks = document.querySelector(".nav-links");
-    const links = document.querySelectorAll(".nav-links li");
+    // const hamburger = document.querySelector(".hamburger");
+    // const navLinks = document.querySelector(".nav-links");
+    // const links = document.querySelectorAll(".nav-links li");
 
-    hamburger.addEventListener('click', () => {
-      //Animate Links
-      navLinks.classList.toggle("open");
-      links.forEach(link => {
-        link.classList.toggle("fade");
-      });
-      //Hamburger Animation
-      hamburger.classList.toggle("toggle");
-    });
+    // hamburger.addEventListener('click', () => {
+    //   //Animate Links
+    //   navLinks.classList.toggle("open");
+    //   links.forEach(link => {
+    //     link.classList.toggle("fade");
+    //   });
+    //   //Hamburger Animation
+    //   hamburger.classList.toggle("toggle");
+    // });
     // Initialize the MapLibre map
     const map = new maplibregl.Map({
       container: 'map', // The ID of the container element
