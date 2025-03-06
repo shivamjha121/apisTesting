@@ -1,0 +1,324 @@
+<?php 
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MapLibre GL JS Map</title>
+
+  <!-- Include MapLibre CSS for styling -->
+  <link href="https://unpkg.com/maplibre-gl@2.10.0/dist/maplibre-gl.css" rel="stylesheet">
+
+  <style>
+    /* Set height for the map container */
+    #map {
+      width: 100%;
+      height: 100vh;
+      /* Full viewport height */
+    }
+
+    /* Headers */
+    * {
+      margin: 0;
+      padding: 0;
+      color: #f2f5f7;
+      font-family: sans-serif;
+      letter-spacing: 1px;
+      font-weight: 300;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    nav {
+      height: 6rem;
+      width: 100vw;
+      background-color: #131418;
+      box-shadow: 0 3px 20px rgba(0, 0, 0, 0.2);
+      display: flex;
+      position: fixed;
+      z-index: 10;
+    }
+
+    /*Styling logo*/
+    .logo {
+      padding: 1vh 1vw;
+      text-align: center;
+    }
+
+    .logo img {
+      height: 5rem;
+      width: 5rem;
+    }
+
+    /*Styling Links*/
+    .nav-links {
+      display: flex;
+      list-style: none;
+      width: 88vw;
+      padding: 0 0.7vw;
+      justify-content: space-evenly;
+      align-items: center;
+      text-transform: uppercase;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      margin: 0 0.7vw;
+    }
+
+    .nav-links li a:hover {
+      color: #61DAFB;
+    }
+
+    .nav-links li {
+      position: relative;
+    }
+
+    .nav-links li a::before {
+      content: "";
+      display: block;
+      height: 3px;
+      width: 0%;
+      background-color: #61DAFB;
+      position: absolute;
+      transition: all ease-in-out 250ms;
+      margin: 0 0 0 10%;
+    }
+
+    .nav-links li a:hover::before {
+      width: 80%;
+    }
+
+    /*Styling Buttons*/
+    .login-button {
+      background-color: transparent;
+      border: 1.5px solid #f2f5f7;
+      border-radius: 2em;
+      padding: 0.6rem 0.8rem;
+      margin-left: 2vw;
+      font-size: 1rem;
+      cursor: pointer;
+
+    }
+
+    .login-button:hover {
+      color: #131418;
+      background-color: #f2f5f7;
+      border: 1.5px solid #f2f5f7;
+      transition: all ease-in-out 350ms;
+    }
+
+    .join-button {
+      color: #131418;
+      background-color: #61DAFB;
+      border: 1.5px solid #61DAFB;
+      border-radius: 2em;
+      padding: 0.6rem 0.8rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .join-button:hover {
+      color: #f2f5f7;
+      background-color: transparent;
+      border: 1.5px solid #f2f5f7;
+      transition: all ease-in-out 350ms;
+    }
+
+    /*Styling Hamburger Icon*/
+    .hamburger div {
+      width: 30px;
+      height: 3px;
+      background: #f2f5f7;
+      margin: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger {
+      display: none;
+    }
+
+    /*Stying for small screens*/
+    @media screen and (max-width: 800px) {
+      nav {
+        position: fixed;
+        z-index: 3;
+      }
+
+      .hamburger {
+        display: block;
+        position: absolute;
+        cursor: pointer;
+        right: 5%;
+        top: 50%;
+        transform: translate(-5%, -50%);
+        z-index: 2;
+        transition: all 0.7s ease;
+      }
+
+      .nav-links {
+        position: fixed;
+        background: #131418;
+        height: 100vh;
+        width: 100%;
+        flex-direction: column;
+        clip-path: circle(50px at 90% -20%);
+        -webkit-clip-path: circle(50px at 90% -10%);
+        transition: all 1s ease-out;
+        pointer-events: none;
+      }
+
+      .nav-links.open {
+        clip-path: circle(1000px at 90% -10%);
+        -webkit-clip-path: circle(1000px at 90% -10%);
+        pointer-events: all;
+      }
+
+      .nav-links li {
+        opacity: 0;
+      }
+
+      .nav-links li:nth-child(1) {
+        transition: all 0.5s ease 0.2s;
+      }
+
+      .nav-links li:nth-child(2) {
+        transition: all 0.5s ease 0.4s;
+      }
+
+      .nav-links li:nth-child(3) {
+        transition: all 0.5s ease 0.6s;
+      }
+
+      .nav-links li:nth-child(4) {
+        transition: all 0.5s ease 0.7s;
+      }
+
+      .nav-links li:nth-child(5) {
+        transition: all 0.5s ease 0.8s;
+      }
+
+      .nav-links li:nth-child(6) {
+        transition: all 0.5s ease 0.9s;
+        margin: 0;
+      }
+
+      .nav-links li:nth-child(7) {
+        transition: all 0.5s ease 1s;
+        margin: 0;
+      }
+
+      li.fade {
+        opacity: 1;
+      }
+    }
+
+    /*Animating Hamburger Icon on Click*/
+    .toggle .line1 {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .toggle .line2 {
+      transition: all 0.7s ease;
+      width: 0;
+    }
+
+    .toggle .line3 {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    .hidden {
+      display: none;
+
+    }
+  </style>
+<script defer src="index.bundle.js"></script></head>
+
+<body>
+  <nav>
+    <div class="logo">
+      <img src="logo.svg" alt="Logo Image">
+    </div>
+    <div class="hamburger">
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="line3"></div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Solutions</a></li>
+      <li><a href="#">Products</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact Us</a></li>
+      <li><button id="loginBtn" class="login-button" onclick="window.location.href='login.html'">Login</button></li>
+      <li><button id="logoutBtn" class="join-button" onclick="logout()">Logout</button></li>
+    </ul>
+  </nav>
+  <!-- Map container -->
+  <div id="map"></div>
+
+  <!-- Include MapLibre JS library -->
+  <script src="https://unpkg.com/maplibre-gl@^5.2.0/dist/maplibre-gl.js"></script>
+  <link href="https://unpkg.com/maplibre-gl@^5.2.0/dist/maplibre-gl.css" rel="stylesheet" />
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const user = localStorage.getItem('_user');
+      console.log(user);
+
+      const loginBtn = document.getElementById('loginBtn');
+      const logoutBtn = document.getElementById('logoutBtn');
+
+      // Check if the user is logged in
+      if (user) {
+        loginBtn.classList.add('hidden'); // Hide login button
+        logoutBtn.classList.remove('hidden'); // Show logout button
+      } else {
+        loginBtn.classList.remove('hidden'); // Show login button
+        logoutBtn.classList.add('hidden'); // Hide logout button
+      }
+    });
+
+    const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.querySelector(".nav-links");
+    const links = document.querySelectorAll(".nav-links li");
+
+    hamburger.addEventListener('click', () => {
+      //Animate Links
+      navLinks.classList.toggle("open");
+      links.forEach(link => {
+        link.classList.toggle("fade");
+      });
+      //Hamburger Animation
+      hamburger.classList.toggle("toggle");
+    });
+    // Initialize the MapLibre map
+    const map = new maplibregl.Map({
+      container: 'map', // The ID of the container element
+      style: 'https://demotiles.maplibre.org/style.json', // A map style URL or style object
+      center: [0, 0], // Longitude, Latitude
+      zoom: 2, // Zoom level
+    });
+
+    // Add a navigation control (zoom and rotation)
+    map.addControl(new maplibregl.NavigationControl());
+
+    // Optional: Add a marker to the map
+    new maplibregl.Marker()
+      .setLngLat([0, 0])
+      .setPopup(new maplibregl.Popup().setHTML('<h3>Center of the Map</h3>'))
+      .addTo(map);
+
+      const logout=()=>{
+        localStorage.removeItem('_user');
+        window.location.href='index.html';
+      }
+  </script>
+
+</body>
+
+</html>
