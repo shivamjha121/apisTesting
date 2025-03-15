@@ -1,3 +1,4 @@
+<?php ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,7 +78,7 @@
         <!-- Send OTP Form -->
         <form id="otp-form" onsubmit="sendOtp(event)">
             <input type="text" id="email-phone" placeholder="Email or Phone No." required>
-            <select id="userRole">
+            <select id="userRole" >
                 <option value="user">User</option>
                 <option value="agent">Agent</option>
                 <option value="builder">Builder</option>
@@ -93,10 +94,12 @@
         </form>
     </div>
 
+</body>
+
 <script>
     // const url = "http://localhost:8001/mapmyplot/apis/userAuth/sendOtp";
-    // const verifyUrl = "http://localhost:8001/mapmyplot/apis/userAuth/validateOtp";
     const url = "http://65.0.201.115/mapmyplot/apis/userAuth/sendOtp";
+    // const verifyUrl = "http://localhost:8001/mapmyplot/apis/userAuth/validateOtp";
     const verifyUrl = "http://65.0.201.115/mapmyplot/apis/userAuth/validateOtp";
 
     let userId = ''; // Variable to store user email or phone
@@ -107,31 +110,30 @@
         try {
             userId = document.getElementById("email-phone").value; // Get user input (email/phone)
             userRole = document.getElementById("userRole").value;
-            
-            // Send the request to send OTP
             const response = await fetch(url + "?userId=" + userId, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json', // Accept JSON responses
+                    'Accept': 'application/json', // Make sure to accept JSON responses
                 },
-                credentials: 'include' // Ensure cookies are included with the request
+                // body: JSON.stringify({ userId }) // Send userId in body
             });
-            console.log(response, "response");
+
             const data = await response.json();
             console.log(data, "data");
-            
+
             if (data.status === 200) {
                 // Hide Send OTP form and show Verify OTP form
                 document.getElementById("otp-form").classList.add('hidden');
                 document.getElementById("verify-otp-form").classList.remove('hidden');
-                alert("OTP sent successfully, please check your email/phone.");
+
+                // Optionally, send an email to the user with the OTP (this would be done server-side)
+                console.log("OTP sent successfully, please check your email/phone.");
             } else {
                 alert("Failed to send OTP. Please try again.");
             }
         } catch (error) {
             console.error(error);
-            alert("An error occurred while sending OTP.");
         }
     };
 
@@ -141,34 +143,24 @@
             const otp = document.getElementById("otp").value; // Get OTP input
             const response = await fetch(verifyUrl + "?userId=" + userId + "&otp=" + otp + "&role=" + userRole, {
                 method: 'POST',
-                
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json', // Accept JSON responses
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Credentials': 'true',
-                    'Cookie': 'true'
+                    'Accept': 'application/json', // Make sure to accept JSON responses
                 },
-                credentials: 'include' // Ensure cookies are included with the request
             });
 
             const data = await response.json();
             if (data.status === 200) {
                 console.log(data);
-                localStorage.setItem('_user', JSON.stringify(data.data));
+                // Redirect to dashboard or other page after successful login
                 alert("OTP verified successfully! You are logged in.");
-                window.location.href = "/index.html";
-                // Optionally redirect to another page (e.g., dashboard)
-                // window.location.href = "/dashboard"; // Adjust URL to match your app
             } else {
                 alert("Invalid OTP. Please try again.");
             }
         } catch (error) {
             console.error(error);
-            alert("An error occurred while verifying OTP.");
         }
     };
 </script>
 
-</body>
 </html>
